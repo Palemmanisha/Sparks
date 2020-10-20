@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'transfer-credit123.heroku
 
 INSTALLED_APPS = [
     'Home.apps.HomeConfig',
-
+     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,10 +127,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICROOT=os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = [
    os.path.join(BASE_DIR, "static")
 ]
- '''   'whitenoise.runserver_nostatic',db_from_env = dj_database_url.config(conn_max_age=600)
+db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
-STATICROOT=os.path.join(BASE_DIR, "static")
-'''
