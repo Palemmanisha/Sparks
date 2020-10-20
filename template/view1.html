@@ -1,0 +1,106 @@
+{% load static %}
+{% static  "images" as baseUrl %}
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+body {
+  background-color: black;
+  font-family: cursive;
+  background-image: url("{{baseUrl}}/7.jpg");
+  height: 50vh;
+     background-size: cover;
+	 background-position: center;
+	
+
+}
+
+.glow {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+th ,td{
+  padding: 8px;
+}
+</style>
+</head>
+<body>
+
+  <div class="w3-sidebar w3-bar-block w3-dark-grey w3-animate-left" style="display:none" id="mySidebar">
+    <button class="w3-bar-item w3-button w3-large"  onclick="w3_close()" style=" color: black; ">Exit &times;</button>
+    <a href="Home" class="w3-bar-item w3-button">Home</a>
+    <a href="Info" class="w3-bar-item w3-button">Transfer</a>
+    <a href="TranInfo" class="w3-bar-item w3-button">View</a>
+  </div>
+  
+  <div>
+    <button class="w3-button w3-white w3-xxlarge" onclick="w3_open()">&#9776;</button>
+    <center><h1 class="glow"> WELCOME TO CREDIT TRANSFER PORTAL</h1></center>
+  <center>
+<center> Select Member to send credits.</center><br>
+<center>
+  <form action="Transfer1" method="POST">
+    {% csrf_token %}
+	<table border="1px" style="border-collapse: collapse">
+      <tr>
+        <th scope="col">User ID</th>
+        <th scope="col">Tick for transfer</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Credits</th>
+      </tr>
+    {% for dest in dests %}
+						
+						<!-- Destination -->
+            {% if dest.email != a %}
+              <tr><td>{{dest.id}}</td>
+              <td><center><input type="radio" name="getter" value={{dest.email}}></center></td>
+              <td>{{dest.name}}</td>
+              <td>{{dest.email}}</td>
+              <td>{{dest.credit}}</td></tr>
+           {% endif %}
+						{% endfor %}
+
+              
+  </table>
+  <br><input type="submit" value="Transfer">
+</form>
+</center>
+
+
+<script>
+  function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+  }
+  function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+  }
+  </script>
+
+</body>
+</html> 
